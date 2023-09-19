@@ -5,4 +5,5 @@
     <color name="base">#0071AF</color>
     <color name="base_light">#2DDCED</color>
     <color name="base_bold">#3FA9F5</color>
+    <color name="background">#FFFDFA</color>
 </resources>

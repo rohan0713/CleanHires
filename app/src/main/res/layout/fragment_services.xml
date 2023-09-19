@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".ui.fragments.ServicesFragment">
 
     <androidx.core.widget.NestedScrollView
@@ -148,9 +149,35 @@
                         android:id="@+id/rvServices"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="20dp"
                         android:layout_below="@id/tvCategoryText"
+                        tools:listitem="@layout/service_item"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginBottom="20dp" />
+
+                    <TextView
+                        android:id="@+id/tvBookedText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Most Booked Services"
+                        android:layout_below="@id/rvServices"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:textSize="16sp"
                         />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvMostBooked"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tvBookedText"
+                        tools:listitem="@layout/service_item"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginBottom="20dp" />
                 </RelativeLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
