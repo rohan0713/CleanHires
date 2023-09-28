@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activities.DescriptionActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cvService"
+                        android:layout_width="match_parent"
+                        android:layout_height="450dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="15dp"
+                        app:cardCornerRadius="20dp">
+
+                        <ImageView
+                            android:id="@+id/ivService"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_cooking" />
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/tvTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Food Cooking - Veg"
+                        android:layout_below="@id/cvService"
+                        android:layout_marginTop="20dp"
+                        android:textSize="22sp"
+                        android:layout_marginStart="15dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvCategory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="House Chores"
+                        android:layout_below="@id/tvTitle"
+                        android:layout_marginTop="5dp"
+                        android:textSize="12sp"
+                        android:padding="8dp"
+                        android:background="@drawable/text_background"
+                        android:layout_marginStart="15dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/base"
+                        />
+
+                    <LinearLayout
+                        android:background="@drawable/text_background"
+                        android:layout_width="wrap_content"
+                        android:padding="8dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tvTitle"
+                        android:layout_toEndOf="@id/tvCategory"
+                        android:layout_margin="5dp"
+                        >
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/ic_star"
+                            app:tint="#FFC107" />
+
+                        <TextView
+                            android:id="@+id/tvUsers"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:textColor="@color/base"
+                            android:text="150+ People Used"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvDescText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tvCategory"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginStart="15dp"
+                        android:text="Description"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        />
+
+                    <RelativeLayout
+                        android:id="@+id/rlBorder"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_below="@id/tvDescText"
+                        android:layout_margin="15dp"
+                        android:background="#ECEDED"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/rlBorder"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:text="CleanHires redefines the art of dining by bringing a personal veggie chef right to your doorstep. Imagine savoring your favorite vegetarian dishes prepared in the comfort of your own home. With CleanHires, you're in control of your culinary journey. Simply share your cravings, dietary preferences, and nutritional goals, and our expert chefs will transform your kitchen into a gourmet haven."
+                        />
+
+
+                    <TextView
+                        android:id="@+id/tvChefs"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Our Chefs"
+                        android:layout_below="@id/tvDescription"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        />
+
+                    <RelativeLayout
+                        android:id="@+id/rlBorder2"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_below="@id/tvChefs"
+                        android:layout_margin="15dp"
+                        android:background="#ECEDED"
+                        />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvChefs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_below="@+id/rlBorder2"
+                        />
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:layout_below="@id/rvChefs"
+                        android:layout_margin="15dp"
+                        android:text="Book your slot"
+                        android:textColor="@color/white"
+                        android:backgroundTint="@color/base"
+                        />
+
+                </RelativeLayout>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

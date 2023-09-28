@@ -1,11 +1,14 @@
 package com.maid.cleanhires.ui.adapters
 
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.maid.cleanhires.data.models.Services
 import com.maid.cleanhires.databinding.ServiceItemBinding
+import com.maid.cleanhires.ui.activities.DescriptionActivity
 import com.squareup.picasso.Picasso
 
 class ServiceAdapter(
@@ -20,6 +23,17 @@ class ServiceAdapter(
             binding.tvServiceName.text = services.title
             binding.tvUsers.text = "${services.used}+ People Used"
             Picasso.get().load(services.urlImage).into(binding.ivService)
+
+            itemView.setOnClickListener { v ->
+                Intent(v.context, DescriptionActivity::class.java).also {
+                    it.putExtra("url", services.urlImage)
+                    Log.d("url", services.urlImage)
+                    it.putExtra("category", services.category)
+                    it.putExtra("title", services.title)
+                    it.putExtra("used", services.used)
+                    v.context.startActivity(it)
+                }
+            }
         }
     }
 

@@ -55,6 +55,8 @@ class ServicesFragment : Fragment() {
                     serviceAdapter2 = ServiceAdapter(list)
                     binding.rvServices.adapter = serviceAdapter
                     binding.rvMostBooked.adapter = serviceAdapter2
+                    binding.clMainLayout.visibility = View.VISIBLE
+                    binding.relativeLayout.visibility = View.GONE
                 }
             }
         }
