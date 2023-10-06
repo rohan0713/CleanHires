@@ -10,7 +10,7 @@ class RetrofitClient {
 
     companion object {
 
-        val retrofitClient by lazy {
+        private val retrofitClient by lazy {
 
             val loggingInterceptor = HttpLoggingInterceptor()
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)

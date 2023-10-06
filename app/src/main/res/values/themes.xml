@@ -5,11 +5,32 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:fontFamily">@font/sen</item>
+
+    </style>
+
+    <style name="Base.Theme.CleanHiresSplash" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:windowBackground">@drawable/background</item>
+        <item name="android:statusBarColor">@color/white</item>
+
     </style>
 
     <style name="circleImageView" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="RounderCorners" parent="">
+<!--        <item name="cornerSizeTopLeft">20dp</item>-->
+<!--        <item name="cornerFamilyTopLeft">rounded</item>-->
+
+<!--        <item name="cornerSizeTopRight">20dp</item>-->
+<!--        <item name="cornerFamilyTopRight">rounded</item>-->
+
+
+        <item name="cornerSizeBottomLeft">200dp</item>
+        <item name="cornerFamilyBottomRight">rounded</item>
     </style>
 
     <style name="Theme.CleanHires" parent="Base.Theme.CleanHires" />

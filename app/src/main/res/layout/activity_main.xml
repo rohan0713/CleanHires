@@ -15,6 +15,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/clean_hires" />
+        android:src="@drawable/clean_hires" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

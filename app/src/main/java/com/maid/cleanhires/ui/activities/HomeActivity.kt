@@ -22,19 +22,22 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         window.statusBarColor = Color.WHITE
-        loadFragment(ServicesFragment())
+
+        if(savedInstanceState == null) {
+            loadFragment(ServicesFragment())
+        }
+
+        val fragmentMap = mapOf(
+            R.id.HomePage to ServicesFragment(),
+            R.id.ProfilePage to ProfileFragment()
+        )
 
         binding.bottomNavigationView.setOnItemSelectedListener { 
-            when (it.itemId){
-                R.id.HomePage -> {
-                    loadFragment(ServicesFragment())
-                    true
-                }
-                else -> {
-                    loadFragment(ProfileFragment())
-                    true
-                }
-            }
+
+            fragmentMap[it.itemId]?.let {
+                fragment -> loadFragment(fragment)
+                true
+            } ?: false
         }
     }
 
