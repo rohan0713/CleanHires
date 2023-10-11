@@ -9,6 +9,7 @@ import android.view.View
 import android.view.WindowManager
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.maid.cleanhires.R
 import com.maid.cleanhires.data.models.Services
 import com.maid.cleanhires.databinding.ActivityDescriptionBinding
@@ -39,7 +40,10 @@ class DescriptionActivity : AppCompatActivity() {
         binding.tvTitle.text = title
         binding.tvUsers.text = "${used}+ People Used"
 
-        Picasso.get().load(url).into(binding.ivService)
+//        Picasso.get().load(url).into(binding.ivService)
+
+        Glide.with(this).load(url).into(binding.ivService)
+
         setupBookedRecyclerView()
 //        showContent()
         window.statusBarColor = Color.WHITE

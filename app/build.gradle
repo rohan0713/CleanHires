@@ -61,6 +61,9 @@ dependencies {
     //Picasso-Image Processing library
     implementation 'com.squareup.picasso:picasso:2.8'
 
+    // Glide library
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
+
     //Lottie Animation
     def lottieVersion = "3.4.0"
     implementation "com.airbnb.android:lottie:$lottieVersion"

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.maid.cleanhires.data.models.Services
 import com.maid.cleanhires.databinding.ServiceItemBinding
 import com.maid.cleanhires.ui.activities.DescriptionActivity
@@ -22,7 +23,9 @@ class ServiceAdapter(
             binding.tvCategory.text = services.category
             binding.tvServiceName.text = services.title
             binding.tvUsers.text = "${services.used}+ People Used"
-            Picasso.get().load(services.urlImage).into(binding.ivService)
+//            Picasso.get().load(services.urlImage).into(binding.ivService)
+
+            Glide.with(binding.root).load(services.urlImage).into(binding.ivService)
 
             itemView.setOnClickListener { v ->
                 Intent(v.context, DescriptionActivity::class.java).also {

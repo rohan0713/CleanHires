@@ -1,8 +1,15 @@
+package com.maid.cleanhires.data.local.room
+
 import android.content.Context
+import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.maid.cleanhires.data.local.room.ServiceDao
+import com.maid.cleanhires.data.models.Services
 
+@Database(
+    entities = [Services::class],
+    version = 3
+)
 abstract class ServiceDatabase : RoomDatabase() {
 
     abstract fun getDao() : ServiceDao
@@ -23,7 +30,8 @@ abstract class ServiceDatabase : RoomDatabase() {
                 context.applicationContext,
                 ServiceDatabase::class.java,
                 "serviceDB.db"
-            ).build()
+            ).fallbackToDestructiveMigration()
+                .build()
     }
 
 }

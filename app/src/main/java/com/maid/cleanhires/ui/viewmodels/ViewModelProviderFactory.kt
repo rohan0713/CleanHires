@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.maid.cleanhires.repositories.ServiceRepository
 
 class ViewModelProviderFactory(
-    val repository: ServiceRepository
+    private val repository: ServiceRepository
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

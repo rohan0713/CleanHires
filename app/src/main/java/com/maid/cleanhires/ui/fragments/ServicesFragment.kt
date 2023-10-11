@@ -1,26 +1,23 @@
 package com.maid.cleanhires.ui.fragments
 
+import com.maid.cleanhires.data.local.room.ServiceDatabase
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.maid.cleanhires.R
 import com.maid.cleanhires.data.models.Services
 import com.maid.cleanhires.databinding.FragmentServicesBinding
-import com.maid.cleanhires.network.RetrofitClient
+import com.maid.cleanhires.main.MyApplication
 import com.maid.cleanhires.repositories.ServiceRepository
 import com.maid.cleanhires.ui.adapters.ServiceAdapter
 import com.maid.cleanhires.ui.viewmodels.ServiceViewModel
 import com.maid.cleanhires.ui.viewmodels.ViewModelProviderFactory
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.maid.cleanhires.utils.NetworkConnection
 
 class ServicesFragment : Fragment() {
 
@@ -29,6 +26,7 @@ class ServicesFragment : Fragment() {
     lateinit var serviceAdapter2: ServiceAdapter
     private lateinit var viewModel : ServiceViewModel
     private lateinit var repository: ServiceRepository
+    private lateinit var application: MyApplication
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,46 +38,28 @@ class ServicesFragment : Fragment() {
         return binding.root
     }
 
-    private fun setupBookedRecyclerView() {
-        val list = listOf<Services>()
-        serviceAdapter2 = ServiceAdapter(list)
-        binding.rvMostBooked.apply {
-            adapter = serviceAdapter2
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        }
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        repository = ServiceRepository()
+        application = requireActivity().applicationContext as MyApplication
+        repository = application.repository
+
         val viewModelProvider = ViewModelProviderFactory(repository)
+
         viewModel = ViewModelProvider(this, viewModelProvider).get(ServiceViewModel::class.java)
 
-
         viewModel.services.observe(viewLifecycleOwner) {
-            serviceAdapter = ServiceAdapter(it)
-            serviceAdapter2 = ServiceAdapter(it)
-            binding.rvServices.adapter = serviceAdapter
-            binding.rvMostBooked.adapter = serviceAdapter2
-            binding.clMainLayout.visibility = View.VISIBLE
-            binding.relativeLayout.visibility = View.GONE
+            useTheResponse(it)
         }
+    }
 
-//        lifecycleScope.launch(Dispatchers.IO) {
-//            val response = RetrofitClient.api.getServices()
-//            withContext(Dispatchers.Main){
-//                if(response.isSuccessful){
-//                    val list = response.body()!!
-//                    serviceAdapter = ServiceAdapter(list)
-//                    serviceAdapter2 = ServiceAdapter(list)
-//                    binding.rvServices.adapter = serviceAdapter
-//                    binding.rvMostBooked.adapter = serviceAdapter2
-//                    binding.clMainLayout.visibility = View.VISIBLE
-//                    binding.relativeLayout.visibility = View.GONE
-//                }
-//            }
-//        }
+    private fun useTheResponse(it: List<Services>) {
+        serviceAdapter = ServiceAdapter(it)
+        serviceAdapter2 = ServiceAdapter(it)
+        binding.rvServices.adapter = serviceAdapter
+        binding.rvMostBooked.adapter = serviceAdapter2
+        binding.clMainLayout.visibility = View.VISIBLE
+        binding.relativeLayout.visibility = View.GONE
     }
 
     private fun setupRecyclerView() {
@@ -87,7 +67,20 @@ class ServicesFragment : Fragment() {
         serviceAdapter = ServiceAdapter(list)
         binding.rvServices.apply {
             adapter = serviceAdapter
-            layoutManager = GridLayoutManager(context, 2)
+            if (this.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                layoutManager = GridLayoutManager(context, 2)
+            }else{
+                layoutManager = GridLayoutManager(context, 3)
+            }
+        }
+    }
+
+    private fun setupBookedRecyclerView() {
+        val list = listOf<Services>()
+        serviceAdapter2 = ServiceAdapter(list)
+        binding.rvMostBooked.apply {
+            adapter = serviceAdapter2
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         }
     }
 }

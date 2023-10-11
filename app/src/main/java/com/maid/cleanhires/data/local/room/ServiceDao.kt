@@ -1,5 +1,6 @@
 package com.maid.cleanhires.data.local.room
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -12,9 +13,9 @@ import kotlinx.coroutines.flow.StateFlow
 interface ServiceDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsert(service: Services) : Long
+    suspend fun upsert(service: Services)
 
     @Query("Select * from serviceTable")
-    fun getServices() : StateFlow<List<Services>>
+    fun getServices(): List<Services>
 
 }

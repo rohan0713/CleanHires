@@ -7,15 +7,21 @@ import android.view.ContextMenu
 import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.maid.cleanhires.R
 import com.maid.cleanhires.databinding.ActivityHomeBinding
 import com.maid.cleanhires.ui.fragments.ProfileFragment
 import com.maid.cleanhires.ui.fragments.ServicesFragment
+import java.sql.Time
+import java.util.TimeZone
+import java.util.Timer
+import java.util.concurrent.TimeUnit
 
 class HomeActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityHomeBinding
+    var pressedTime : Long? = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -45,5 +51,14 @@ class HomeActivity : AppCompatActivity() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.flFrameLayout,fragment)
         transaction.commit()
+    }
+
+    override fun onBackPressed() {
+        if(pressedTime?.plus(1000)!! >= System.currentTimeMillis()){
+            super.onBackPressed()
+        }else{
+            Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show()
+        }
+        pressedTime = System.currentTimeMillis()
     }
 }
