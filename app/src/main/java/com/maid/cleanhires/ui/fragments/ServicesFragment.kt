@@ -7,26 +7,36 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.maid.cleanhires.data.models.Services
 import com.maid.cleanhires.databinding.FragmentServicesBinding
 import com.maid.cleanhires.main.MyApplication
 import com.maid.cleanhires.repositories.ServiceRepository
+import com.maid.cleanhires.ui.activities.HomeActivity
 import com.maid.cleanhires.ui.adapters.ServiceAdapter
 import com.maid.cleanhires.ui.viewmodels.ServiceViewModel
 import com.maid.cleanhires.ui.viewmodels.ViewModelProviderFactory
 import com.maid.cleanhires.utils.NetworkConnection
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class ServicesFragment : Fragment() {
+@AndroidEntryPoint
+class ServicesFragment @Inject constructor(): Fragment() {
 
     lateinit var binding: FragmentServicesBinding
     lateinit var serviceAdapter: ServiceAdapter
     lateinit var serviceAdapter2: ServiceAdapter
-    private lateinit var viewModel : ServiceViewModel
-    private lateinit var repository: ServiceRepository
-    private lateinit var application: MyApplication
+    lateinit var viewModel : ServiceViewModel
+
+//    private lateinit var viewModel : ServiceViewModel
+//    @Inject
+//    private lateinit var repository: ServiceRepository
+//    private lateinit var application: MyApplication
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,12 +51,14 @@ class ServicesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        application = requireActivity().applicationContext as MyApplication
-        repository = application.repository
+//        application = requireActivity().applicationContext as MyApplication
+//        repository = application.repository
 
-        val viewModelProvider = ViewModelProviderFactory(repository)
+        viewModel = (requireActivity() as HomeActivity).viewModel
 
-        viewModel = ViewModelProvider(this, viewModelProvider).get(ServiceViewModel::class.java)
+//        val viewModelProvider = ViewModelProviderFactory(repository)
+//
+//        viewModel = ViewModelProvider(this, viewModelProvider).get(ServiceViewModel::class.java)
 
         viewModel.services.observe(viewLifecycleOwner) {
             useTheResponse(it)

@@ -12,7 +12,9 @@ import com.maid.cleanhires.R
 import com.maid.cleanhires.databinding.ActivityMainBinding
 import com.maid.cleanhires.ui.activities.HomeActivity
 import com.maid.cleanhires.ui.activities.LoginActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding

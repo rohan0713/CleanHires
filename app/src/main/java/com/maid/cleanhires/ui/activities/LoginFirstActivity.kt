@@ -6,11 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.maid.cleanhires.R
 import com.maid.cleanhires.databinding.ActivityLoginFirstBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
-
+@AndroidEntryPoint
 class LoginFirstActivity : AppCompatActivity() {
 
     lateinit var binding : ActivityLoginFirstBinding

@@ -8,20 +8,24 @@ import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import com.maid.cleanhires.R
 import com.maid.cleanhires.databinding.ActivityHomeBinding
 import com.maid.cleanhires.ui.fragments.ProfileFragment
 import com.maid.cleanhires.ui.fragments.ServicesFragment
+import com.maid.cleanhires.ui.viewmodels.ServiceViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import java.sql.Time
 import java.util.TimeZone
 import java.util.Timer
 import java.util.concurrent.TimeUnit
-
+@AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityHomeBinding
     var pressedTime : Long? = 0
+    val viewModel : ServiceViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

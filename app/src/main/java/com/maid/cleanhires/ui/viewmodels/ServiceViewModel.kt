@@ -10,11 +10,14 @@ import androidx.lifecycle.viewModelScope
 import com.maid.cleanhires.data.models.Services
 import com.maid.cleanhires.repositories.ServiceRepository
 import com.maid.cleanhires.utils.NetworkConnection
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import javax.inject.Inject
 
-class ServiceViewModel(
+@HiltViewModel
+class ServiceViewModel @Inject constructor(
     private val repository: ServiceRepository
 ) : ViewModel() {
 
@@ -28,41 +31,9 @@ class ServiceViewModel(
 
     private fun getAllServices() = viewModelScope.launch {
 
-//        if(NetworkConnection().isOnline(Application().baseContext)){
-//            val response = repository.getServicesFromNetwork()
-//            _services.postValue(response.body())
-//            handleResponse(response)
-//        }else{
-//            val response = repository.getServiceFromDB()
-//            _services.postValue(response.value)
-//        }
         Log.d("room", "inside viewmodel")
         repository.getServicesFromNetwork()
         _services.postValue(repository.dataFromRepo.value)
 
     }
-
-//    fun getData(): List<Services> {
-//        services?.let {
-//            return services
-//        }
-//        return listOf()
-//    }
-
-    private fun handleResponse(response: Response<List<Services>>) {
-        if (response.isSuccessful) {
-            response.body()?.let { it ->
-                it.listIterator().forEach { services ->
-                    Log.d("response", services.toString())
-                    saveServices(services)
-                }
-            }
-        }
-    }
-
-    private fun saveServices(services: Services) = viewModelScope.launch {
-        repository.insertData(services)
-    }
-
-//    fun getServicesFromDB() = repository.getServiceFromDB()
 }

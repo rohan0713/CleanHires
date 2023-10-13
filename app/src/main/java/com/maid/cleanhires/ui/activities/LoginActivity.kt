@@ -9,7 +9,9 @@ import android.view.Window
 import android.view.WindowManager
 import com.maid.cleanhires.R
 import com.maid.cleanhires.databinding.ActivityLoginBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityLoginBinding

@@ -11,8 +11,9 @@ import com.maid.cleanhires.utils.NetworkConnection
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
+import javax.inject.Inject
 
-class ServiceRepository(
+class ServiceRepository @Inject constructor(
     private val db: ServiceDatabase,
     private val applicationContext: Context
 ) {
@@ -30,9 +31,6 @@ class ServiceRepository(
                 val response = RetrofitClient.api.getServices()
                 if (response.body() != null) {
                     handleResponse(response)
-                    getServiceFromDB()
-//                    val responseDB = getServiceFromDB()
-//                    Log.d("room", responseDB.value.toString())
                 }
             }
         } else {
