@@ -7,51 +7,6 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:203153418206:android:49d8634f1648da40e25f4f",
-        "android_client_info": {
-          "package_name": "com.example.crypto"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "203153418206-ooccquqa5f80kh0sjfumfnlvkod98c36.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.crypto",
-            "certificate_hash": "b61d67aa4627e02794ed0184ed8c90a14890545b"
-          }
-        },
-        {
-          "client_id": "203153418206-vrj8cr6j1eu7qsilcg7ffn825g9jf9tr.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.crypto",
-            "certificate_hash": "7767fb5a00771f577c925829cb8fd54e3ec8ae0f"
-          }
-        },
-        {
-          "client_id": "203153418206-nvqnmsr7tc9otg3c8j7f50ilnqmihdi4.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAKaEFWFZnIhCzRYPCO9JxC0BHqAimomFI"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "203153418206-nvqnmsr7tc9otg3c8j7f50ilnqmihdi4.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:203153418206:android:b0d2f4439fbba54de25f4f",
         "android_client_info": {
           "package_name": "com.maid.cleanhires"
@@ -59,7 +14,23 @@
       },
       "oauth_client": [
         {
-          "client_id": "203153418206-nvqnmsr7tc9otg3c8j7f50ilnqmihdi4.apps.googleusercontent.com",
+          "client_id": "203153418206-fadev9sjg5ealk1nf1t5f5112stvfcvp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.maid.cleanhires",
+            "certificate_hash": "d752523bd9c70dd8bede54f0d5fcf0afe215b33a"
+          }
+        },
+        {
+          "client_id": "203153418206-ul6vicn3dtmdgle0qic81l2l6afllgp2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.maid.cleanhires",
+            "certificate_hash": "b61d67aa4627e02794ed0184ed8c90a14890545b"
+          }
+        },
+        {
+          "client_id": "203153418206-f0i79thbd1ltnn06qhhqgibgl1pjifpa.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -72,7 +43,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "203153418206-nvqnmsr7tc9otg3c8j7f50ilnqmihdi4.apps.googleusercontent.com",
+              "client_id": "203153418206-f0i79thbd1ltnn06qhhqgibgl1pjifpa.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -24,8 +24,7 @@ import com.maid.cleanhires.utils.NetworkConnection
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-@AndroidEntryPoint
-class ServicesFragment @Inject constructor(): Fragment() {
+class ServicesFragment : Fragment() {
 
     lateinit var binding: FragmentServicesBinding
     lateinit var serviceAdapter: ServiceAdapter
