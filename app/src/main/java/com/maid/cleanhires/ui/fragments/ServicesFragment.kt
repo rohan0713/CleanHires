@@ -1,5 +1,6 @@
 package com.maid.cleanhires.ui.fragments
 
+import android.content.Intent
 import com.maid.cleanhires.data.local.room.ServiceDatabase
 import android.content.res.Configuration
 import android.os.Bundle
@@ -16,6 +17,7 @@ import com.maid.cleanhires.data.models.Services
 import com.maid.cleanhires.databinding.FragmentServicesBinding
 import com.maid.cleanhires.main.MyApplication
 import com.maid.cleanhires.repositories.ServiceRepository
+import com.maid.cleanhires.ui.activities.CartActivity
 import com.maid.cleanhires.ui.activities.HomeActivity
 import com.maid.cleanhires.ui.adapters.ServiceAdapter
 import com.maid.cleanhires.ui.viewmodels.ServiceViewModel
@@ -61,6 +63,10 @@ class ServicesFragment : Fragment() {
 
         viewModel.services.observe(viewLifecycleOwner) {
             useTheResponse(it)
+        }
+
+        binding.ivCart.setOnClickListener {
+            Intent(binding.root.context, CartActivity::class.java).also { startActivity(it) }
         }
     }
 

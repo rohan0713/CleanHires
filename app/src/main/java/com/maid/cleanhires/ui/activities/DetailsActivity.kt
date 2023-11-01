@@ -1,5 +1,6 @@
 package com.maid.cleanhires.ui.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.graphics.Color
@@ -18,5 +19,11 @@ class DetailsActivity : AppCompatActivity() {
         window.statusBarColor = Color.WHITE
         binding.rvReviews.layoutManager = LinearLayoutManager(this)
         binding.rvReviews.adapter = ReviewsAdapter()
+
+        binding.btnBook.setOnClickListener {
+            Intent(this@DetailsActivity, CartActivity::class.java).also {
+                startActivity(it)
+            }
+        }
     }
 }
