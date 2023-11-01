@@ -1,9 +1,11 @@
 package com.maid.cleanhires.ui.adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.maid.cleanhires.databinding.EmployeeItemBinding
+import com.maid.cleanhires.ui.activities.DetailsActivity
 
 class HiresAdapter(
 
@@ -23,5 +25,10 @@ class HiresAdapter(
     }
 
     override fun onBindViewHolder(holder: HireViewHolder, position: Int) {
+        holder.itemView.setOnClickListener {
+            Intent(binding.root.context, DetailsActivity::class.java).also {
+                binding.root.context.startActivity(it)
+            }
+        }
     }
 }

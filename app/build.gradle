@@ -27,6 +27,14 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+//    productFlavors {
+//        free {
+//            applicationIdSuffix ".free"
+//        }
+//        pro {
+//            applicationIdSuffix ".pro"
+//        }
+//    }
 
     buildTypes {
         release {

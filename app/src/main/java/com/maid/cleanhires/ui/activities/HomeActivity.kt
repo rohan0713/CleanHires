@@ -42,8 +42,7 @@ class HomeActivity : AppCompatActivity() {
             R.id.ProfilePage to ProfileFragment()
         )
 
-        binding.bottomNavigationView.setOnItemSelectedListener { 
-
+        binding.bottomNavigationView.setOnItemSelectedListener {
             fragmentMap[it.itemId]?.let {
                 fragment -> loadFragment(fragment)
                 true
