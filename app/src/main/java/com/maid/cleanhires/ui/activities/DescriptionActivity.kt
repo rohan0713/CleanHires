@@ -48,6 +48,12 @@ class DescriptionActivity : AppCompatActivity() {
 //        showContent()
         window.statusBarColor = Color.WHITE
 
+        binding.btnBook.setOnClickListener {
+            Intent(this, ProvidersActivity::class.java).also {
+                startActivity(it)
+            }
+        }
+
     }
 
     private fun setupBookedRecyclerView() {
