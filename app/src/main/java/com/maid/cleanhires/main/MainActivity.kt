@@ -10,6 +10,7 @@ import android.view.View
 import android.view.WindowManager
 import com.maid.cleanhires.R
 import com.maid.cleanhires.databinding.ActivityMainBinding
+import com.maid.cleanhires.ui.activities.DetailsActivity
 import com.maid.cleanhires.ui.activities.HomeActivity
 import com.maid.cleanhires.ui.activities.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         Handler(Looper.getMainLooper()).postDelayed(
             Runnable {
-                Intent(this@MainActivity, LoginActivity::class.java).also {
+                Intent(this@MainActivity, DetailsActivity::class.java).also {
                     startActivity(it)
                     finish()
                 }
