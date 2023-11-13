@@ -10,5 +10,6 @@ data class Services(
     val category : String,
     val used : Int,
     val Availability : Boolean,
-    val urlImage : String
+    val urlImage : String,
+    val description : String
 )

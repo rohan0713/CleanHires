@@ -33,7 +33,13 @@
             android:exported="false" />
         <activity
             android:name=".ui.activities.LoginFirstActivity"
-            android:exported="false" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.activities.LoginActivity"
             android:exported="false" />
@@ -45,14 +51,8 @@
             android:exported="false" />
         <activity
             android:name=".main.MainActivity"
-            android:exported="true"
-            android:theme="@style/Base.Theme.CleanHiresSplash">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false"
+            android:theme="@style/Base.Theme.CleanHiresSplash"/>
 
         <meta-data
             android:name="preloaded_fonts"

@@ -9,3 +9,12 @@ plugins {
     id 'org.jetbrains.kotlin.android' version '1.8.20' apply false
     id 'com.google.dagger.hilt.android' version '2.44' apply false
 }
+
+//ext {
+//    androidxAnnotationVersion = "1.5.0"
+//    extTruthVersion = "1.6.0-alpha01"
+//    coreVersion = "1.6.0-alpha01"
+//    extJUnitVersion = "1.2.0-alpha01"
+//    runnerVersion = "1.6.0-alpha03"
+//    espressoVersion = "3.6.0-alpha01"
+//}

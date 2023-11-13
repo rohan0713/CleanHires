@@ -22,7 +22,8 @@ object AppModule {
         context,
         ServiceDatabase::class.java,
         "serviceDB.db"
-    ).build()
+    ).fallbackToDestructiveMigration()
+        .build()
 
     @Provides
     fun provideContext(@ApplicationContext context: Context) :Context {

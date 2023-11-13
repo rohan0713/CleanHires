@@ -9,10 +9,12 @@
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/linearLayoutFooter"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -60,8 +62,8 @@
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cvService"
-                        android:layout_width="200dp"
-                        android:layout_height="180dp"
+                        android:layout_width="150dp"
+                        android:layout_height="120dp"
                         android:layout_margin="20dp"
                         app:cardCornerRadius="20dp">
 
@@ -74,52 +76,79 @@
                     </androidx.cardview.widget.CardView>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:id="@+id/layoutInfo"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="30dp"
+                        android:layout_marginTop="25dp"
                         android:layout_marginEnd="10dp"
                         android:layout_toEndOf="@id/cvService"
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tvWorkerName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Mrs. Anshika Tomar"
+                            tools:text="Mrs. Anshika Tomar"
                             android:textColor="@color/base"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tvWorkerLocation"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="Patel Nagar, India"
+                            tools:text="Patel Nagar, India"
                             android:textSize="13sp"
                             android:textStyle="bold" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/tvServiceName"
                             android:layout_marginTop="5dp">
 
                             <RatingBar
-                                android:id="@+id/tvUsers"
+                                android:id="@+id/ratingBar"
                                 style="?android:attr/ratingBarStyleSmall"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:rating="4.5"
-                                android:text="150+ People Used"
+                                tools:rating="4.5"
                                 android:textSize="13sp"
                                 android:textStyle="bold" />
 
 
                         </LinearLayout>
 
+                        <RelativeLayout
+                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/tvPrice"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                tools:text="₹ 249"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                />
+
+                            <TextView
+                                android:id="@+id/tvDuration"
+                                android:layout_toEndOf="@id/tvPrice"
+                                android:layout_marginStart="15dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                tools:text="• 45 mins"
+                                android:textSize="16sp"
+                                />
+
+                        </RelativeLayout>
+
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnBook"
                             android:layout_marginTop="10dp"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="50dp"
                             android:backgroundTint="@color/base"
                             android:text="Book Now"
@@ -131,7 +160,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/cvService"
+                        android:layout_below="@id/layoutInfo"
                         android:orientation="vertical">
 
                         <TextView
@@ -156,6 +185,7 @@
                             android:padding="8dp">
 
                             <TextView
+                                android:id="@+id/tvBooking"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="5dp"
@@ -168,6 +198,7 @@
                         </LinearLayout>
 
                         <TextView
+                            android:id="@+id/tvCategory"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
@@ -176,12 +207,13 @@
                             android:text="Categories: House chores" />
 
                         <TextView
+                            android:id="@+id/tvJoined"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
                             android:layout_marginTop="5dp"
                             android:layout_marginEnd="15dp"
-                            android:text="Serving Clean hires since August 2021" />
+                            tools:text="Serving Clean hires since August 2021" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -201,8 +233,7 @@
                             android:id="@+id/rvReviews"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="15dp"
-                            tools:listitem="@layout/reviews_item" />
+                            android:layout_margin="15dp" />
 
                     </LinearLayout>
 
@@ -212,5 +243,36 @@
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/linearLayoutFooter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_weight="1"
+            android:text="Total Amount:\n₹220"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnViewCart"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_margin="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/base"
+            android:text="View cart" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

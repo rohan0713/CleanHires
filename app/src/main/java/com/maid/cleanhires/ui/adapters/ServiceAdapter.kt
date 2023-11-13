@@ -34,6 +34,7 @@ class ServiceAdapter(
                     it.putExtra("category", services.category)
                     it.putExtra("title", services.title)
                     it.putExtra("used", services.used)
+                    it.putExtra("desc", services.description)
                     v.context.startActivity(it)
                 }
             }

@@ -134,7 +134,7 @@
                         android:layout_below="@id/rlBorder"
                         android:layout_marginStart="15dp"
                         android:layout_marginEnd="15dp"
-                        android:text="CleanHires redefines the art of dining by bringing a personal veggie chef right to your doorstep. Imagine savoring your favorite vegetarian dishes prepared in the comfort of your own home. With CleanHires, you're in control of your culinary journey. Simply share your cravings, dietary preferences, and nutritional goals, and our expert chefs will transform your kitchen into a gourmet haven."
+                        tools:text="CleanHires redefines the art of dining by bringing a personal veggie chef right to your doorstep. Imagine savoring your favorite vegetarian dishes prepared in the comfort of your own home. With CleanHires, you're in control of your culinary journey. Simply share your cravings, dietary preferences, and nutritional goals, and our expert chefs will transform your kitchen into a gourmet haven."
                         />
 
 

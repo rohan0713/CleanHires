@@ -212,32 +212,32 @@
                         />
 
                     <androidx.cardview.widget.CardView
-                        android:layout_below="@id/tvDetails"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="20dp"
-                        app:cardCornerRadius="20dp"
-                        >
+                        android:layout_below="@id/tvDetails"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginBottom="20dp"
+                        app:cardCornerRadius="20dp">
 
                         <RelativeLayout
-                            android:layout_margin="15dp"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:layout_margin="15dp">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Item Total"
-                                />
+                                android:text="Item Total" />
 
                             <TextView
                                 android:id="@+id/tvTotal"
-                                android:layout_alignParentEnd="true"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
                                 android:text="₹220"
-                                android:textStyle="bold"
-                                />
+                                android:textStyle="bold" />
 
                             <RelativeLayout
                                 android:id="@+id/rlBorder3"
@@ -248,25 +248,23 @@
                                 android:background="#ECEDED" />
 
                             <TextView
-                                android:layout_below="@id/rlBorder3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="To Pay"
+                                android:layout_below="@id/rlBorder3"
                                 android:layout_marginTop="10dp"
-                                android:textStyle="bold"
-                                />
+                                android:text="To Pay"
+                                android:textStyle="bold" />
 
                             <TextView
-                                android:layout_below="@id/rlBorder3"
                                 android:id="@+id/tvToPay"
-                                android:layout_alignParentEnd="true"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="₹220"
-                                android:textStyle="bold"
-                                android:textColor="@color/base"
+                                android:layout_below="@id/rlBorder3"
+                                android:layout_alignParentEnd="true"
                                 android:layout_marginTop="10dp"
-                                />
+                                android:text="₹220"
+                                android:textColor="@color/base"
+                                android:textStyle="bold" />
                         </RelativeLayout>
                     </androidx.cardview.widget.CardView>
 

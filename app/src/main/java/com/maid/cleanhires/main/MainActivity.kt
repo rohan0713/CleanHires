@@ -13,6 +13,7 @@ import com.maid.cleanhires.databinding.ActivityMainBinding
 import com.maid.cleanhires.ui.activities.DetailsActivity
 import com.maid.cleanhires.ui.activities.HomeActivity
 import com.maid.cleanhires.ui.activities.LoginActivity
+import com.maid.cleanhires.ui.activities.LoginFirstActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,7 +34,7 @@ class MainActivity : AppCompatActivity() {
 
         Handler(Looper.getMainLooper()).postDelayed(
             Runnable {
-                Intent(this@MainActivity, DetailsActivity::class.java).also {
+                Intent(this@MainActivity, LoginFirstActivity::class.java).also {
                     startActivity(it)
                     finish()
                 }

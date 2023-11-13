@@ -11,7 +11,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.maid.cleanhires.R
+import com.maid.cleanhires.data.models.CategoriesItem
 import com.maid.cleanhires.data.models.Services
+import com.maid.cleanhires.data.models.WorkersResponse
 import com.maid.cleanhires.databinding.ActivityDescriptionBinding
 import com.maid.cleanhires.network.RetrofitClient
 import com.maid.cleanhires.ui.adapters.HiresAdapter
@@ -35,10 +37,12 @@ class DescriptionActivity : AppCompatActivity() {
         val title = intent.getStringExtra("title")
         val used = intent.getIntExtra("used", 0).toString()
         val category = intent.getStringExtra("category")
+        val desc = intent.getStringExtra("desc")
 
         binding.tvCategory.text = category
         binding.tvTitle.text = title
         binding.tvUsers.text = "${used}+ People Used"
+        binding.tvDescription.text = desc
 
 //        Picasso.get().load(url).into(binding.ivService)
 
@@ -47,6 +51,17 @@ class DescriptionActivity : AppCompatActivity() {
         setupBookedRecyclerView()
 //        showContent()
         window.statusBarColor = Color.WHITE
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            val response = RetrofitClient.api.getCleanHiresWorkers()
+            if(response.isSuccessful){
+                withContext(Dispatchers.Main){
+                   response.body()?.let {
+                       binding.rvChefs.adapter = HiresAdapter(it.categories)
+                   }
+                }
+            }
+        }
 
         binding.btnBook.setOnClickListener {
             Intent(this, ProvidersActivity::class.java).also {
@@ -57,8 +72,8 @@ class DescriptionActivity : AppCompatActivity() {
     }
 
     private fun setupBookedRecyclerView() {
-        val list = listOf<Services>()
-        serviceAdapter2 = HiresAdapter()
+        val list = listOf<CategoriesItem>()
+        serviceAdapter2 = HiresAdapter(list)
         binding.rvChefs.apply {
             adapter = serviceAdapter2
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)

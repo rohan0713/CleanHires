@@ -11,6 +11,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
@@ -65,8 +66,16 @@ class LoginFirstActivity : AppCompatActivity() {
 
         binding.btnLogin.setOnClickListener {
             signOutFromGoogle()
-            Intent(this@LoginFirstActivity, HomeActivity::class.java).also {
-                startActivity(it)
+            if(validateCredentials()) {
+                Intent(this@LoginFirstActivity, HomeActivity::class.java).also {
+                    startActivity(it)
+                }
+            }else{
+                Snackbar.make(
+                    binding.root,
+                    "Invalid Credentials",
+                    Snackbar.LENGTH_SHORT
+                ).show()
             }
         }
 
@@ -77,6 +86,17 @@ class LoginFirstActivity : AppCompatActivity() {
         binding.googleSignButton.setOnClickListener {
             signIn()
         }
+    }
+
+    private fun validateCredentials() : Boolean {
+
+        val email = binding.etEmail.text
+        val password = binding.etPassword.text
+
+        if(email != null && password != null && password.length > 6  && password.length < 8){
+            return true
+        }
+        return false
     }
 
     private fun signIn() {

@@ -72,7 +72,7 @@ class ServicesFragment : Fragment() {
 
     private fun useTheResponse(it: List<Services>) {
         serviceAdapter = ServiceAdapter(it)
-        serviceAdapter2 = ServiceAdapter(it)
+        serviceAdapter2 = ServiceAdapter(it.subList(0, it.size/2))
         binding.rvServices.adapter = serviceAdapter
         binding.rvMostBooked.adapter = serviceAdapter2
         binding.clMainLayout.visibility = View.VISIBLE

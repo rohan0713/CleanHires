@@ -6,8 +6,12 @@ import android.os.Bundle
 import android.graphics.Color
 import android.text.format.DateFormat.is24HourFormat
 import android.util.Log
+import android.view.View
+import android.view.animation.TranslateAnimation
+import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -29,6 +33,26 @@ class DetailsActivity : AppCompatActivity() {
         setContentView(ActivityDetailsBinding.inflate(layoutInflater).also { binding = it }.root)
 
         window.statusBarColor = Color.WHITE
+
+        val name = intent.getStringExtra("name")
+        val location = intent.getStringExtra("location")
+        val rating = intent.getFloatExtra("rating", 5.0F)
+        val charges = intent.getStringExtra("charges")
+        val count = intent.getStringExtra("count")
+        val duration = intent.getStringExtra("duration")
+        val joined = intent.getStringExtra("joined")
+        val img = intent.getStringExtra("image")
+
+        binding.tvWorkerName.text = name
+        binding.tvWorkerLocation.text = location
+        binding.tvPrice.text = "₹ $charges"
+        binding.tvDuration.text = "• $duration mins"
+        binding.tvJoined.text = "Serving Clean hires since $joined"
+        binding.tvBooking.text = "Completed $count Bookings"
+        binding.ratingBar.rating = rating
+
+        Glide.with(binding.root).load(img).into(binding.ivPerson)
+
         binding.rvReviews.layoutManager = LinearLayoutManager(this)
         binding.rvReviews.adapter = ReviewsAdapter()
 
@@ -49,9 +73,15 @@ class DetailsActivity : AppCompatActivity() {
                     val minute = picker.minute
 
                     Log.d("time", "$date $hour $minute")
+                    Toast.makeText(this, "Booking done successfully", Toast.LENGTH_SHORT).show()
+                    binding.linearLayoutFooter.visibility = View.VISIBLE
                 }
             }
 
+        }
+
+        binding.btnViewCart.setOnClickListener {
+            Intent(this, CartActivity::class.java).also { startActivity(it) }
         }
     }
 }
