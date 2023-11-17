@@ -1,6 +1,8 @@
 package com.maid.cleanhires.ui.activities
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.graphics.Color
@@ -9,7 +11,9 @@ import android.util.Log
 import android.view.View
 import android.view.animation.TranslateAnimation
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.android.material.datepicker.CalendarConstraints
@@ -19,20 +23,51 @@ import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.MaterialTimePicker.INPUT_MODE_CLOCK
 import com.google.android.material.timepicker.TimeFormat
 import com.maid.cleanhires.R
+import com.maid.cleanhires.data.local.room.ServiceDatabase
+import com.maid.cleanhires.data.models.CartItems
+import com.maid.cleanhires.data.models.ReviewsItem
 import com.maid.cleanhires.databinding.ActivityDetailsBinding
+import com.maid.cleanhires.repositories.CartRepository
 import com.maid.cleanhires.ui.adapters.ReviewsAdapter
+import com.maid.cleanhires.ui.viewmodels.CartViewModel
 import com.maid.cleanhires.utils.DateAndTimePicker
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Locale
 
+@AndroidEntryPoint
 class DetailsActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityDetailsBinding
+    lateinit var sharedPreferences: SharedPreferences
+    lateinit var repository: CartRepository
+    private val viewModel : CartViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(ActivityDetailsBinding.inflate(layoutInflater).also { binding = it }.root)
 
         window.statusBarColor = Color.WHITE
+
+        sharedPreferences = getSharedPreferences("data", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+
+        val flag = sharedPreferences.getBoolean("cart", false)
+        var cartItemCount = sharedPreferences.getInt("item", 0)
+        Log.d("flag", flag.toString())
+
+        if(flag){
+
+            val charges = intent.getStringExtra("charges")
+            val amount = charges?.toInt()?.times(cartItemCount)
+            binding.tvTotalAmount.text = "Total Amount:\n₹$amount"
+            binding.linearLayoutFooter.visibility = View.VISIBLE
+
+        }else{
+            binding.linearLayoutFooter.visibility = View.GONE
+        }
 
         val name = intent.getStringExtra("name")
         val location = intent.getStringExtra("location")
@@ -42,6 +77,9 @@ class DetailsActivity : AppCompatActivity() {
         val duration = intent.getStringExtra("duration")
         val joined = intent.getStringExtra("joined")
         val img = intent.getStringExtra("image")
+        val title = sharedPreferences.getString("title", "Food-Cooking")
+
+        val list = intent.getSerializableExtra("reviews") as List<ReviewsItem>
 
         binding.tvWorkerName.text = name
         binding.tvWorkerLocation.text = location
@@ -54,7 +92,7 @@ class DetailsActivity : AppCompatActivity() {
         Glide.with(binding.root).load(img).into(binding.ivPerson)
 
         binding.rvReviews.layoutManager = LinearLayoutManager(this)
-        binding.rvReviews.adapter = ReviewsAdapter()
+        binding.rvReviews.adapter = ReviewsAdapter(list)
 
         binding.btnBook.setOnClickListener {
 
@@ -72,9 +110,24 @@ class DetailsActivity : AppCompatActivity() {
                     val hour = picker.hour
                     val minute = picker.minute
 
-                    Log.d("time", "$date $hour $minute")
+                    val bookingTime = "$date $hour:$minute"
+
+                    Log.d("time", "$title - $bookingTime")
+                    viewModel.insertIntoCart(CartItems(title!!, bookingTime))
+
                     Toast.makeText(this, "Booking done successfully", Toast.LENGTH_SHORT).show()
+
+                    editor.putBoolean("cart", true)
+                    editor.putInt("item", ++cartItemCount)
+                    editor.apply()
+
+                    val amount = charges?.toInt()?.times(cartItemCount)
+                    binding.tvTotalAmount.text = "Total Amount:\n₹$amount"
                     binding.linearLayoutFooter.visibility = View.VISIBLE
+
+                    lifecycleScope.launch(Dispatchers.IO) {
+
+                    }
                 }
             }
 
@@ -82,6 +135,10 @@ class DetailsActivity : AppCompatActivity() {
 
         binding.btnViewCart.setOnClickListener {
             Intent(this, CartActivity::class.java).also { startActivity(it) }
+        }
+
+        binding.ivBack.setOnClickListener {
+            finish()
         }
     }
 }

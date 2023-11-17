@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.maid.cleanhires.data.local.room.ServiceDao
 import com.maid.cleanhires.data.local.room.ServiceDatabase
+import com.maid.cleanhires.repositories.CartRepository
 import com.maid.cleanhires.repositories.ServiceRepository
 import dagger.Module
 import dagger.Provides
@@ -36,4 +37,6 @@ object AppModule {
     @Provides
     fun provideRepository(serviceDatabase: ServiceDatabase, context: Context) =
         ServiceRepository(serviceDatabase, context)
+    @Provides
+    fun provideCartRepository(serviceDatabase: ServiceDatabase) = CartRepository(serviceDatabase)
 }

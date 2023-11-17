@@ -1,5 +1,7 @@
 package com.maid.cleanhires.data.models
 
+import java.io.Serializable
+
 data class WorkersResponse(
 	val categories: List<CategoriesItem>
 )
@@ -7,7 +9,7 @@ data class WorkersResponse(
 data class CategoriesItem(
 	val duration: Int? = null,
 	val charges: Int? = null,
-	val reviews: List<ReviewsItem?>? = null,
+	val reviews: List<ReviewsItem>,
 	val joined: String? = null,
 	val service: String? = null,
 	val urlToImage: String? = null,
@@ -23,5 +25,5 @@ data class ReviewsItem(
 	val image: String? = null,
 	val username: String? = null,
 	val timestamp: String? = null
-)
+) : Serializable
 

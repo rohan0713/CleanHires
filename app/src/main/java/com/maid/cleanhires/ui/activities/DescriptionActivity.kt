@@ -1,6 +1,8 @@
 package com.maid.cleanhires.ui.activities
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -27,17 +29,24 @@ class DescriptionActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityDescriptionBinding
     lateinit var serviceAdapter2: HiresAdapter
+    lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityDescriptionBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        sharedPreferences = getSharedPreferences("data", Context.MODE_PRIVATE)
+
         val url = intent.getStringExtra("url")
         val title = intent.getStringExtra("title")
         val used = intent.getIntExtra("used", 0).toString()
         val category = intent.getStringExtra("category")
         val desc = intent.getStringExtra("desc")
+
+        val editor = sharedPreferences.edit()
+        editor.putString("title", title.toString())
+        editor.apply()
 
         binding.tvCategory.text = category
         binding.tvTitle.text = title

@@ -142,7 +142,7 @@
                         android:id="@+id/tvChefs"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Our Chefs"
+                        android:text="Top rated staff of the week"
                         android:layout_below="@id/tvDescription"
                         android:layout_marginTop="25dp"
                         android:layout_marginStart="15dp"

@@ -1,5 +1,7 @@
 package com.maid.cleanhires.ui.activities
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -26,12 +28,18 @@ class HomeActivity : AppCompatActivity() {
     lateinit var binding: ActivityHomeBinding
     var pressedTime : Long? = 0
     val viewModel : ServiceViewModel by viewModels()
+    lateinit var sharedPreferences: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         window.statusBarColor = Color.WHITE
+
+        sharedPreferences = getSharedPreferences("data", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.clear()
+        editor.apply()
 
         if(savedInstanceState == null) {
             loadFragment(ServicesFragment())

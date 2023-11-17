@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.maid.cleanhires.data.models.CategoriesItem
 import com.maid.cleanhires.databinding.EmployeeItemBinding
 import com.maid.cleanhires.ui.activities.DetailsActivity
+import java.io.Serializable
 
 class HiresAdapter(
     val list: List<CategoriesItem>
@@ -35,6 +36,7 @@ class HiresAdapter(
                     it.putExtra("duration", worker.duration.toString())
                     it.putExtra("joined", worker.joined)
                     it.putExtra("image", worker.urlToImage)
+                    it.putExtra("reviews", worker.reviews as Serializable)
                     binding.root.context.startActivity(it)
                 }
             }

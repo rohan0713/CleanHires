@@ -4,11 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.maid.cleanhires.data.models.CartItems
 import com.maid.cleanhires.data.models.Services
 
 @Database(
-    entities = [Services::class],
-    version = 4
+    entities = [Services::class, CartItems::class],
+    version = 5
 )
 abstract class ServiceDatabase : RoomDatabase() {
 

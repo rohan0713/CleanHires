@@ -42,7 +42,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tvServiceCategory"
+                android:id="@+id/tvBookingTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvServiceName"
@@ -53,7 +53,7 @@
                 android:id="@+id/tvCustomize"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tvServiceCategory"
+                android:layout_below="@id/tvBookingTime"
                 android:text="customize"
                 android:textColor="@color/base"
                 android:textSize="12sp"
