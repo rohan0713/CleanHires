@@ -52,22 +52,22 @@ class DetailsActivity : AppCompatActivity() {
         window.statusBarColor = Color.WHITE
 
         sharedPreferences = getSharedPreferences("data", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-
-        val flag = sharedPreferences.getBoolean("cart", false)
-        var cartItemCount = sharedPreferences.getInt("item", 0)
-        Log.d("flag", flag.toString())
-
-        if(flag){
-
-            val charges = intent.getStringExtra("charges")
-            val amount = charges?.toInt()?.times(cartItemCount)
-            binding.tvTotalAmount.text = "Total Amount:\n₹$amount"
-            binding.linearLayoutFooter.visibility = View.VISIBLE
-
-        }else{
-            binding.linearLayoutFooter.visibility = View.GONE
-        }
+//        val editor = sharedPreferences.edit()
+//
+//        val flag = sharedPreferences.getBoolean("cart", false)
+//        var cartItemCount = sharedPreferences.getInt("item", 0)
+//        Log.d("flag", flag.toString())
+//
+//        if(flag){
+//
+//            val charges = intent.getStringExtra("charges")
+//            val amount = charges?.toInt()?.times(cartItemCount)
+//            binding.tvTotalAmount.text = "Total Amount:\n₹$amount"
+//            binding.linearLayoutFooter.visibility = View.VISIBLE
+//
+//        }else{
+//            binding.linearLayoutFooter.visibility = View.GONE
+//        }
 
         val name = intent.getStringExtra("name")
         val location = intent.getStringExtra("location")
@@ -91,6 +91,16 @@ class DetailsActivity : AppCompatActivity() {
 
         Glide.with(binding.root).load(img).into(binding.ivPerson)
 
+        viewModel.totalAmount.observe(this) {sum ->
+
+            if(sum != null){
+                binding.tvTotalAmount.text = "Total Amount:\n₹${sum.toString()}"
+                binding.linearLayoutFooter.visibility = View.VISIBLE
+            }else{
+                binding.linearLayoutFooter.visibility = View.GONE
+            }
+        }
+
         binding.rvReviews.layoutManager = LinearLayoutManager(this)
         binding.rvReviews.adapter = ReviewsAdapter(list)
 
@@ -113,21 +123,16 @@ class DetailsActivity : AppCompatActivity() {
                     val bookingTime = "$date $hour:$minute"
 
                     Log.d("time", "$title - $bookingTime")
-                    viewModel.insertIntoCart(CartItems(title!!, bookingTime))
+                    viewModel.insertIntoCart(CartItems(name!!, title!!, bookingTime, charges?.toInt()!!))
 
                     Toast.makeText(this, "Booking done successfully", Toast.LENGTH_SHORT).show()
 
-                    editor.putBoolean("cart", true)
-                    editor.putInt("item", ++cartItemCount)
-                    editor.apply()
+//                    editor.putBoolean("cart", true)
+//                    editor.putInt("item", ++cartItemCount)
+//                    editor.apply()
 
-                    val amount = charges?.toInt()?.times(cartItemCount)
-                    binding.tvTotalAmount.text = "Total Amount:\n₹$amount"
-                    binding.linearLayoutFooter.visibility = View.VISIBLE
-
-                    lifecycleScope.launch(Dispatchers.IO) {
-
-                    }
+//                    val amount = charges?.toInt()?.times(cartItemCount)
+//                    binding.tvTotalAmount.text = "Total Amount:\n₹$amount"
                 }
             }
 

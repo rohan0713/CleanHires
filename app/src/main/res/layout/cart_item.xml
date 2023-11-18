@@ -50,11 +50,11 @@
                 android:textSize="12sp" />
 
             <TextView
-                android:id="@+id/tvCustomize"
+                android:id="@+id/tvWorkerName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvBookingTime"
-                android:text="customize"
+                android:text="Simran Ji"
                 android:textColor="@color/base"
                 android:textSize="12sp"
                 android:textStyle="bold" />

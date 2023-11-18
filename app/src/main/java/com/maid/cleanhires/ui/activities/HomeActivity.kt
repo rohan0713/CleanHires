@@ -16,6 +16,7 @@ import com.maid.cleanhires.R
 import com.maid.cleanhires.databinding.ActivityHomeBinding
 import com.maid.cleanhires.ui.fragments.ProfileFragment
 import com.maid.cleanhires.ui.fragments.ServicesFragment
+import com.maid.cleanhires.ui.viewmodels.CartViewModel
 import com.maid.cleanhires.ui.viewmodels.ServiceViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.sql.Time
@@ -28,6 +29,7 @@ class HomeActivity : AppCompatActivity() {
     lateinit var binding: ActivityHomeBinding
     var pressedTime : Long? = 0
     val viewModel : ServiceViewModel by viewModels()
+    val cartViewModel : CartViewModel by viewModels()
     lateinit var sharedPreferences: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

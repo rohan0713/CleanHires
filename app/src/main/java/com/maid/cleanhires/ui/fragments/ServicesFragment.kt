@@ -20,6 +20,7 @@ import com.maid.cleanhires.repositories.ServiceRepository
 import com.maid.cleanhires.ui.activities.CartActivity
 import com.maid.cleanhires.ui.activities.HomeActivity
 import com.maid.cleanhires.ui.adapters.ServiceAdapter
+import com.maid.cleanhires.ui.viewmodels.CartViewModel
 import com.maid.cleanhires.ui.viewmodels.ServiceViewModel
 import com.maid.cleanhires.ui.viewmodels.ViewModelProviderFactory
 import com.maid.cleanhires.utils.NetworkConnection
@@ -32,6 +33,7 @@ class ServicesFragment : Fragment() {
     lateinit var serviceAdapter: ServiceAdapter
     lateinit var serviceAdapter2: ServiceAdapter
     lateinit var viewModel : ServiceViewModel
+    lateinit var cartViewModel : CartViewModel
 
 //    private lateinit var viewModel : ServiceViewModel
 //    @Inject
@@ -56,6 +58,7 @@ class ServicesFragment : Fragment() {
 //        repository = application.repository
 
         viewModel = (requireActivity() as HomeActivity).viewModel
+        cartViewModel = (requireActivity() as HomeActivity).cartViewModel
 
 //        val viewModelProvider = ViewModelProviderFactory(repository)
 //
@@ -63,6 +66,14 @@ class ServicesFragment : Fragment() {
 
         viewModel.services.observe(viewLifecycleOwner) {
             useTheResponse(it)
+        }
+
+        cartViewModel.items.observe(viewLifecycleOwner) {list ->
+            if(list.isNotEmpty()) {
+                binding.tvCartItem.text = list.size.toString()
+            }else{
+                binding.tvCartItem.text = "0"
+            }
         }
 
         binding.ivCart.setOnClickListener {

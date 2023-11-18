@@ -14,7 +14,7 @@ class CartRepository @Inject constructor(
 
     fun getCartItems() : LiveData<List<CartItems>> = db.getDao().getCartItems()
 
-    fun getAmount(title : String) = db.getDao().getItemAmount(title)
+    fun getAmount() : LiveData<Int> = db.getDao().getItemAmount()
 
     fun deleteItem(items: CartItems) = db.getDao().deleteCartItem(items)
 }

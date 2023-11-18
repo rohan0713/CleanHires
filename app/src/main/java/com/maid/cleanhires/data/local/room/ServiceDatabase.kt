@@ -9,7 +9,7 @@ import com.maid.cleanhires.data.models.Services
 
 @Database(
     entities = [Services::class, CartItems::class],
-    version = 5
+    version = 7
 )
 abstract class ServiceDatabase : RoomDatabase() {
 

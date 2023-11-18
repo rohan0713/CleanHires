@@ -26,8 +26,8 @@ interface ServiceDao {
     @Query("Select * from cart")
     fun getCartItems() : LiveData<List<CartItems>>
 
-    @Query("Select * from cart where item = :title")
-    fun getItemAmount(title : String) : List<CartItems>
+    @Query("Select SUM(amount) from cart")
+    fun getItemAmount() : LiveData<Int>
 
     @Delete
     fun deleteCartItem(items: CartItems)
