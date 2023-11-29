@@ -18,7 +18,17 @@
         android:roundIcon="@drawable/clean_hires"
         android:supportsRtl="true"
         android:theme="@style/Theme.CleanHires"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.activities.UpdatePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.UpdateProfile"
+            android:exported="false" />
         <activity
             android:name=".ui.activities.ProvidersActivity"
             android:exported="false" />
@@ -33,7 +43,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.activities.LoginFirstActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".ui.activities.LoginActivity"
             android:exported="false" />
@@ -42,8 +52,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.activities.HomeActivity"
-            android:exported="false"/>
-
+            android:exported="false" />
         <activity
             android:name=".main.MainActivity"
             android:exported="true"

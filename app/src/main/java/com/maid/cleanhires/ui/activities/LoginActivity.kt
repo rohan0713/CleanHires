@@ -1,6 +1,7 @@
 package com.maid.cleanhires.ui.activities
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,6 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityLoginBinding
+    lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,10 +33,19 @@ class LoginActivity : AppCompatActivity() {
 //            WindowManager.LayoutParams.FLAG_FULLSCREEN
 //        )
         window.statusBarColor = Color.TRANSPARENT
+        sharedPreferences = getSharedPreferences("data", MODE_PRIVATE)
+        val access = sharedPreferences.getBoolean("access", false)
 
         binding.materialButton.setOnClickListener {
-            Intent(this@LoginActivity, LoginFirstActivity::class.java).also {
-                startActivity(it)
+
+            if(access) {
+                Intent(this@LoginActivity, HomeActivity::class.java).also {
+                    startActivity(it)
+                }
+            } else{
+                Intent(this@LoginActivity, LoginFirstActivity::class.java).also {
+                    startActivity(it)
+                }
             }
         }
     }

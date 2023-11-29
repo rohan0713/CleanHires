@@ -7,5 +7,9 @@ class Constants {
         val url by lazy {
             "https://cleanit.free.beeceptor.com/"
         }
+
+        val profileURL by lazy {
+            "https://backend-api-peach.vercel.app/"
+        }
     }
 }

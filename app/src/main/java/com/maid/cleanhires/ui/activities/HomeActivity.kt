@@ -38,10 +38,10 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
         window.statusBarColor = Color.WHITE
 
-        sharedPreferences = getSharedPreferences("data", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.clear()
-        editor.apply()
+//        sharedPreferences = getSharedPreferences("data", Context.MODE_PRIVATE)
+//        val editor = sharedPreferences.edit()
+//        editor.clear()
+//        editor.apply()
 
         if(savedInstanceState == null) {
             loadFragment(ServicesFragment())

@@ -1,12 +1,12 @@
 package com.maid.cleanhires.ui.activities
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
-import com.google.android.gms.auth.api.identity.BeginSignInRequest
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -15,21 +15,21 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import com.maid.cleanhires.R
 import com.maid.cleanhires.databinding.ActivityLoginFirstBinding
+import com.maid.cleanhires.network.RetrofitClient
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+
 @AndroidEntryPoint
 class LoginFirstActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityLoginFirstBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var mGoogleSignInClient: GoogleSignInClient
+    lateinit var sharedPreferences: SharedPreferences
 
     companion object {
         private const val RC_SIGN_IN = 9001
@@ -47,12 +47,12 @@ class LoginFirstActivity : AppCompatActivity() {
     }
 
     private fun updateUI(currentUser: FirebaseUser?) {
-
-        if (currentUser != null) {
-            Toast.makeText(this, "Already Signed in as ${currentUser.displayName}", Toast.LENGTH_SHORT).show()
-        }else{
-            Toast.makeText(this@LoginFirstActivity, "No login detected", Toast.LENGTH_LONG).show()
-        }
+//
+//        if (currentUser != null) {
+//            Toast.makeText(this, "Already Signed in as ${currentUser.displayName}", Toast.LENGTH_SHORT).show()
+//        }else{
+//            Toast.makeText(this@LoginFirstActivity, "No login detected", Toast.LENGTH_LONG).show()
+//        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,23 +60,15 @@ class LoginFirstActivity : AppCompatActivity() {
         setContentView(ActivityLoginFirstBinding.inflate(layoutInflater).also { binding = it }.root)
         window.statusBarColor = Color.WHITE
 
+        sharedPreferences = getSharedPreferences("data", MODE_PRIVATE)
+
         auth = FirebaseAuth.getInstance()
         val currentUser = auth.currentUser
         updateUI(currentUser)
 
         binding.btnLogin.setOnClickListener {
-            signOutFromGoogle()
-            if(validateCredentials()) {
-                Intent(this@LoginFirstActivity, HomeActivity::class.java).also {
-                    startActivity(it)
-                }
-            }else{
-                Snackbar.make(
-                    binding.root,
-                    "Invalid Credentials",
-                    Snackbar.LENGTH_SHORT
-                ).show()
-            }
+//            signOutFromGoogle()
+           validateCredentials()
         }
 
         binding.ivBack.setOnClickListener {
@@ -86,17 +78,50 @@ class LoginFirstActivity : AppCompatActivity() {
         binding.googleSignButton.setOnClickListener {
             signIn()
         }
+
+        binding.tvRegister.setOnClickListener {
+            Intent(this@LoginFirstActivity, SignUpActivity::class.java).also { startActivity(it) }
+        }
+
+        binding.tvForgotPassword.setOnClickListener {
+            Intent(this@LoginFirstActivity, UpdatePasswordActivity::class.java).also { startActivity(it) }
+        }
     }
 
-    private fun validateCredentials() : Boolean {
+    private fun validateCredentials() {
 
         val email = binding.etEmail.text
         val password = binding.etPassword.text
 
-        if(email != null && password != null && password.length > 6  && password.length < 8){
-            return true
+        if(email != null && password != null){
+            lifecycleScope.launch(Dispatchers.IO) {
+                val response = RetrofitClient.userApi.login(email.toString(), password.toString())
+                if(response.isSuccessful){
+                    withContext(Dispatchers.Main){
+                        val flag = response.body().let {
+                            it?.status
+                        }
+                        if(flag == true) {
+
+                            val editor = sharedPreferences.edit()
+                            editor.putBoolean("access", true)
+                            editor.apply()
+
+                            Intent(this@LoginFirstActivity, HomeActivity::class.java).also {
+                                startActivity(it)
+                                finish()
+                            }
+                        }else{
+                            Snackbar.make(
+                                binding.root,
+                                "Invalid Credentials",
+                                Snackbar.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                }
+            }
         }
-        return false
     }
 
     private fun signIn() {
