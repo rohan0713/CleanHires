@@ -12,6 +12,15 @@ CleanHires is a platform that offers a variety of home services to make your lif
 5. **Confirmation:** Receive confirmation details and the assigned service provider.
 6. **Enjoy:** Sit back, relax, and enjoy the professional service.
 
+
+## Demo
+
+
+
+https://github.com/rohan0713/CleanHires/assets/43573988/13e5ae6e-1bce-4ea8-a347-6f3691a7cd38
+
+
+
 ## Screenshots
 
 |||||
